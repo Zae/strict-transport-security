@@ -15,6 +15,9 @@ class L4HTSTServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->middleware( $this->app->make('Zae\StrictTransportSecurity\Middleware\L4\StrictTransportSecurity') );
+		$hsts = $this->app->make('Zae\StrictTransportSecurity\HSTS');
+		$middle = $this->app->make('Zae\StrictTransportSecurity\Middleware\L4\StrictTransportSecurity', [$this->app, $hsts]);
+
+		$this->app->middleware( $middle, [$hsts] );
 	}
 }
