@@ -1,0 +1,39 @@
+{
+    "name": "zae/strict-transport-security",
+    "description": "Set the HSTS header to enable HTTP Strict Transport Security",
+    "keywords": ["http", "ssl", "tsl", "hsts", "strict transport security", "laravel", "laravel 4", "laravel 5", "middleware", "stackphp"],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ezra Pool",
+            "email": "ezra@tsdme.nl"
+        }
+    ],
+    "require": {
+        "illuminate/support": "~1.0",
+        "illuminate/config": "~1.0",
+        "symfony/http-foundation": "~2.0",
+        "symfony/http-kernel": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "mockery/mockery": "~0.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zae\\StrictTransportSecurity\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
