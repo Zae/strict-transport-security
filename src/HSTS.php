@@ -76,6 +76,6 @@ class HSTS
 	 */
 	public function setHeader(Response &$response)
 	{
-		$response->header(static::HEADER_NAME, join(';', $this->header), true);
+		$response->headers->set(static::HEADER_NAME, join(';', $this->header), true);
 	}
 }
