@@ -25,7 +25,7 @@ $ composer require zae/strict-transport-security
 Add the class `Zae\StrictTransportSecurity\Middleware\L5\StrictTransportSecurity` to the `$middlewares` array.
 
 ### Laravel 4
-Add the serviceprovider to the list of service providers: `L4HTSTServiceProvider`
+Add the serviceprovider to the list of service providers: `Zae\StrictTransportSecurity\ServiceProvider\L4HTSTServiceProvider`
 
 ## Testing
 
