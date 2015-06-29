@@ -24,8 +24,79 @@ $ composer require zae/strict-transport-security
 ### Laravel 5
 Add the class `Zae\StrictTransportSecurity\Middleware\L5\StrictTransportSecurity` to the `$middlewares` array.
 
+``` php
+#app/Http/Kernel.php
+
+protected $middleware = [
+	'Illuminate\View\Middleware\ShareErrorsFromSession',
+	'Zae\StrictTransportSecurity\Middleware\L5\StrictTransportSecurity',
+];
+```
+
 ### Laravel 4
 Add the serviceprovider to the list of service providers: `Zae\StrictTransportSecurity\ServiceProvider\L4HTSTServiceProvider`
+
+``` php
+#app/config.php
+
+'providers' => array(
+	'Illuminate\Foundation\Providers\ArtisanServiceProvider',
+	'Illuminate\Auth\AuthServiceProvider',
+	
+	'Zae\StrictTransportSecurity\ServiceProvider\L4HTSTServiceProvider',
+),
+```
+
+### Silex Example
+``` php
+require __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+$app = new Silex\Application();
+
+$app->get('/', function(Request $request) {
+return new Response('Hello world!', 200);
+});
+
+$app = (new Stack\Builder())
+->push('Zae\StrictTransportSecurity\Middleware\L4\StrictTransportSecurity', [new \Zae\StrictTransportSecurity\HSTS(new Illuminate\Config\Repository())])
+->resolve($app)
+;
+
+$request = Request::createFromGlobals();
+$response = $app->handle($request)->send();
+
+$app->terminate($request, $response);
+```
+
+### Symfony Example
+``` php
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Debug\Debug;
+
+$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+Debug::enable();
+
+require_once __DIR__.'/../app/AppKernel.php';
+
+$kernel = new AppKernel('dev', true);
+$kernel->loadClassCache();
+
+$app = (new Stack\Builder())
+	->push('Zae\StrictTransportSecurity\Middleware\L4\StrictTransportSecurity', [new \Zae\StrictTransportSecurity\HSTS(new Illuminate\Config\Repository())])
+	->resolve($app)
+;
+
+$kernel = $stack->resolve($kernel);
+
+Request::enableHttpMethodParameterOverride();
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);
+```
 
 ## Testing
 
