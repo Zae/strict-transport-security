@@ -32,8 +32,7 @@ protected $middleware = [
 	'Zae\StrictTransportSecurity\Middleware\L5\StrictTransportSecurity',
 ];
 ```
-
-Add the service provider `Zae\StrictTransportSecurity\ServiceProvider\L5HTSTServiceProvider` to the `providers` array in the app config.
+It's not strictly required to use the middleware but if you want to use the `vendor:publish` command add the service provider `Zae\StrictTransportSecurity\ServiceProvider\L5HTSTServiceProvider` to the `providers` array in the app config.
 ``` php
 #config/app.php
 
