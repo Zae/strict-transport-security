@@ -33,6 +33,21 @@ protected $middleware = [
 ];
 ```
 
+Add the service provider `Zae\StrictTransportSecurity\ServiceProvider\L5HTSTServiceProvider` to the `providers` array in the app config.
+``` php
+#config/app.php
+
+return [
+	'providers' => [
+		Illuminate\View\ViewServiceProvider::class,
+
+		Zae\StrictTransportSecurity\ServiceProvider\L5HTSTServiceProvider::class,
+	],
+];
+```
+
+Publish the config with `php artisan vendor:publish`. This file will be created at `config/hsts.php`.
+
 ### Laravel 4
 Add the serviceprovider to the list of service providers: `Zae\StrictTransportSecurity\ServiceProvider\L4HTSTServiceProvider`
 
