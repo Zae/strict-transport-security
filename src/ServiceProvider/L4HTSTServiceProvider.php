@@ -20,16 +20,4 @@ class L4HTSTServiceProvider extends ServiceProvider
 
 		$this->app->middleware( $middle, [$hsts] );
 	}
-        
-        /**
-         * Perform post-registration booting of services.
-         * 
-         * @return void
-         */
-        public function boot()
-        {
-            $this->publishes([
-                __DIR__.'/../config/hsts.php' => config_path('hsts.php')
-            ], 'config');
-        }
 }
